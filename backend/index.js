@@ -5,7 +5,7 @@ const express = require('express');
 const cors = require('cors');
 const connection = require('./db'); //Import from db.js
 
-
+const path = require('path');
 
 //////////////////////////////////////////////////////
 // INIT
@@ -20,8 +20,10 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-app.use("/", express.static("../frontend-react/build"));
+//app.use("/", express.static("../frontend-react/build"));
 app.use("/legacy", express.static("../frontend"));
+
+app.use(express.static(path.join(__dirname, '../frontend-react/build')));
 
 //////////////////////////////////////////////////////
 // DISPLAY SERVER RUNNING
@@ -44,3 +46,11 @@ app.use("/api", mainRoutes);
 app.get("/message", (req, res, next) => {
     res.send(req.query);
 });
+
+//////////////////////////////////////////////////////
+// FOR SINGLE PAGE APPLICATION
+//////////////////////////////////////////////////////
+app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname, '../frontend-react/build', 'index.html'));
+  });
+  
