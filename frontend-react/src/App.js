@@ -14,6 +14,7 @@ import ProductsScreen from './screens/ProductsScreen';
 import NoScreen from './screens/NoScreen';
 import FooterBar from './components/FooterBar';
 import SingleProductScreen from './screens/SingleProductScreen';
+import UserProfile from './screens/UserProfile';
 
 const ProductIdWrapper = () => {
   const { productId } = useParams();
@@ -37,6 +38,7 @@ class App extends React.Component
                     <Route exact path="/" element={<HomeScreen/>}/>
                     <Route path="/products" element={<ProductsScreen/>}/>
                     <Route path="/products/:productId" element={<ProductIdWrapper/>}/>
+                    <Route path="/user/:userId" element={<UserProfile/>}/>
                     <Route path="*" element={<NoScreen/>}/>
                   </Routes>
                 </BrowserRouter>
